@@ -1,0 +1,36 @@
+# Python 虚拟环境
+.venv/
+
+# Python 缓存与测试缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# 机密配置
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+
+# 原始实验文献与可重新生成的中间数据
+data/raw/
+data/parsed/
+data/
+*.pdf
+
+# 自动生成的运行报告；精选结论另存到 docs/experiments
+reports/
+
+# 本地生成文件、编辑器配置和操作系统缓存
+output/
+outputs/
+tmp/
+*.log
+.coverage
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

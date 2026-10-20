@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MathScope · 有据可查的数学助手</title>
+  <meta name="description" content="本地 PDF 数学学习工作台：检索原文，预览核对证据，受控调用 DeepSeek 并追溯引用。">
+  <link rel="stylesheet" href="/ui/app.css">
+  <script src="/ui/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#query">跳到检索问题</a>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">M</span><span>MathScope<small>有据可查的数学助手</small></span></a>
+    <nav aria-label="辅助导航"><span class="local-badge">LOCAL MVP · 本机私有</span><a href="/docs" target="_blank" rel="noopener">开发者接口 ↗</a></nav>
+  </header>
+  <main class="workspace">
+    <aside class="library panel" aria-labelledby="library-heading">
+      <div class="section-title"><div><span class="eyebrow">DOCUMENTS</span><h2 id="library-heading">我的文档</h2></div><button id="refresh" class="quiet" type="button">刷新</button></div>
+      <p class="hint">保存在当前服务的数据目录中。</p>
+      <form id="upload-form" class="upload-box">
+        <label for="pdf-file">添加一份 PDF</label>
+        <input id="pdf-file" type="file" accept=".pdf,application/pdf" required aria-describedby="upload-hint">
+        <p id="upload-hint" class="hint">最多 10 MiB · 上传后仍需解析</p>
+        <button id="upload" class="primary" type="submit">上传并选中</button>
+      </form>
+      <div id="document-list" class="document-list" aria-label="已上传文档"></div>
+      <div class="pagination"><button id="previous" class="quiet" type="button">上一页</button><span id="page-info">正在读取…</span><button id="next" class="quiet" type="button">下一页</button></div>
+      <p class="hint library-note">每页 20 份，按编号排序。同名文件也有独立编号。</p>
+      <section class="model-panel" aria-labelledby="model-heading"><div class="section-title"><h3 id="model-heading">模型连接</h3><button id="model-refresh" type="button" class="quiet">检查状态</button></div><div id="model-status" role="status" aria-live="polite">正在读取本机配置…</div><p class="hint">只读取本机状态，不调用模型、不验证密钥或余额。密钥不会发送到浏览器。</p></section>
+    </aside>
+    <section class="work-area">
+      <div class="intro"><span class="eyebrow">READ · ASK · VERIFY</span><h1>让讲义里的答案，<br>有据可查。</h1><p>原文留在本机。先找证据，再决定是否让 DeepSeek 回答。</p><div class="workflow"><span>01 选择讲义</span><span>02 免费预览</span><span>03 确认后回答</span></div></div>
+      <div id="notice" class="notice" role="status" aria-live="polite">正在连接本地文档库…</div>
+      <section class="panel selected-panel" aria-labelledby="selected-heading">
+        <div class="step-title"><span class="step">01</span><h2 id="selected-heading">当前文档</h2></div>
+        <div id="selected-info"><p class="empty">从左侧选择一份文档，或先上传 PDF。</p></div>
+        <form id="parse-form" class="parse-controls">
+          <label for="chunk-size">每块最多字符数<input id="chunk-size" type="number" min="1" max="10000" value="500" step="1" required></label>
+          <button id="parse" class="secondary" type="submit" disabled>解析文档</button>
+          <span id="parse-hint" class="hint">请先选择文档。</span>
+        </form>
+      </section>
+      <section class="panel query-panel" aria-labelledby="search-heading">
+        <div class="step-title"><span class="step">02</span><h2 id="search-heading">你想了解什么？</h2></div>
+        <form id="search-form">
+          <label for="query">输入问题或关键词</label>
+          <textarea id="query" rows="3" maxlength="500" required placeholder="例如：复数三角不等式在什么条件下取等号？"></textarea>
+          <div class="question-examples" aria-label="示例问题"><button id="example-condition" type="button" class="quiet">三角不等式何时取等号？</button><button id="example-proof" type="button" class="quiet">如果我想要完整证明呢？</button></div>
+          <div class="search-controls"><label for="method">检索方案<select id="method"><option value="normalized">术语统一 BM25</option><option value="original">原始 BM25</option></select></label><label for="k">最多返回<input id="k" type="number" min="1" max="20" value="10" step="1" required></label><button id="search" class="secondary" type="submit" disabled>只检索原文</button><button id="preview" class="primary" type="button" disabled>免费预览证据 →</button></div>
+        </form>
+        <p class="hint">检索与预览都不调用模型。BM25 按词语匹配排序，分数不是置信度。示例针对现有 lecture.pdf，不是任意讲义都支持的通用问答。</p>
+      </section>
+      <section class="panel answer-panel" aria-labelledby="answer-heading">
+        <div class="section-title"><div class="step-title"><span class="step">03</span><h2 id="answer-heading">有依据的回答</h2></div><span id="answer-status" class="badge">尚未调用模型</span></div>
+        <div id="review-preview" aria-live="polite"><p class="empty">先免费预览，看看当前问题有没有可用的已核对结论。</p></div>
+        <div class="call-controls"><label class="consent-label" for="external-consent"><input id="external-consent" type="checkbox" disabled><span>我同意将本次问题和核对结论发送给 DeepSeek，可能产生 API 费用。</span></label><button id="answer" class="primary" type="button" disabled>调用 DeepSeek 生成回答</button><p id="answer-hint" class="hint">预览不会收费；只有证据就绪、模型可用并明确同意后才可请求回答。</p></div>
+        <div id="answer-result" aria-live="polite"><p class="empty">真实回答、引用、模型名称和用量会显示在这里，不展示伪造的成功示例。</p></div>
+        <p class="scope-note">当前为「已核对公式」模式：只允许选择核对过的结论，不自动补全证明。现有登记仅覆盖 lecture.pdf 的一条三角不等式结论；其他问题可检索原文，证据不足时不会调用模型。引用检查不等于数学语义证明。</p>
+      </section>
+      <section class="evidence-section" aria-labelledby="evidence-heading">
+        <div class="section-title"><div class="step-title"><span class="step">04</span><h2 id="evidence-heading">回到原文核对</h2></div><span id="result-count" class="hint">尚未检索</span></div>
+        <p id="result-summary" class="hint"></p>
+        <div id="results"><div class="panel empty-state"><span class="empty-symbol">⌕</span><h3>让每条结果都有出处</h3><p>这里将展示原文、PDF 物理页号和页内字符区间。</p></div></div>
+      </section>
+      <footer>MathScope · 本地单用户学习 MVP<br>原 PDF 在新标签页打开，无片段高亮 · 不保证答案的数学正确性 · 请勿直接暴露到公网</footer>
+    </section>
+  </main>
+  <noscript>此工作台需要启用 JavaScript。你仍可在 /docs 使用接口测试页面。</noscript>
+</body>
+</html>

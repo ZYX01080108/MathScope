@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "dataset_version": "lecture-dev-v0.1",
+  "split": "development",
+  "annotation_status": "partial_target_evidence",
+  "annotation_provenance": "Q001-Q003 经用户实验核对；Q004-Q010 经助手提取文本与 PDF 渲染页核对，待用户复核。",
+  "metric_scope": "目标证据覆盖率、目标证据 RR/MRR、目标证据 nDCG；相关证据尚未穷尽，不宣称正式 Recall 或独立测试集效果。",
+  "review_date": "2026-10-07",
+  "artifacts": {
+    "pdf": {"path": "data/raw/lecture.pdf", "sha256": "e39578464cadbeb48ecf64633bcced41b646ce1641fbb35f5a28a8fb1df9d7c3"},
+    "pages": {"path": "data/parsed/lecture.page.jsonl", "sha256": "19341321f9834edca2e6af5c11449d83a99773cb775e1751aaface9fc333d97e"},
+    "chunks": {"path": "data/parsed/lecture.chunks.jsonl", "sha256": "fc9df2512373e559ca256b087b8d59ac25628e798fedc46b581b84bead6d7823"}
+  },
+  "expected_page_count": 84,
+  "expected_chunk_count": 237,
+  "extraction": {"parser": "pypdf", "version": "6.19.0", "page_numbering": "one_based_physical_pdf_page"},
+  "chunking": {"unit": "python_string_character", "chunk_size": 500, "overlap": 0, "cross_page": false, "offset_interval": "[start_char,end_char)"},
+  "limitations": ["公式上标、共轭横线等可能在文本提取中失真，答案要点已对照 PDF 原图。", "十道题全部属于开发集，不能当作独立留出测试集。", "两道证据不足题仅记录人工预期，不自动评判拒答。"]
+}

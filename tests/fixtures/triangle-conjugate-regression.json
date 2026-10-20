@@ -1,0 +1,12 @@
+{
+  "case_id": "MATH-F001",
+  "source_sha256": "e39578464cadbeb48ecf64633bcced41b646ce1641fbb35f5a28a8fb1df9d7c3",
+  "pdf_page_number": 9,
+  "printed_page_number": 3,
+  "extracted_quote": "不等式成为等式的充要条件是 zw ≥ 0.",
+  "incorrect_claim": "复数三角不等式 |z+w| ≤ |z|+|w| 成为等式的充要条件是 zw ≥ 0。",
+  "visually_verified_formula": "z * conjugate(w) is a nonnegative real number",
+  "observed_bar": {"line_width": 0.478, "start": [166.99, -70.35], "end": [175.68, -70.35]},
+  "counterexample": {"z": [0, 1], "w": [0, 1]},
+  "expected_policy": "block_generation_without_rewriting_text"
+}

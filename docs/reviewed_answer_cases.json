@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "reviewed-answer-dev-v0.1",
+  "split": "development",
+  "annotation_scope": "single_reviewed_statement_behavior",
+  "config": {"method": "normalized", "k": 10, "max_context_chars": 6000},
+  "review_records": [
+    {
+      "review_id": "FR001",
+      "source_sha256": "e39578464cadbeb48ecf64633bcced41b646ce1641fbb35f5a28a8fb1df9d7c3",
+      "pdf_page_number": 9,
+      "raw_start_char": 67,
+      "raw_end_char": 88,
+      "raw_quote": "不等式成为等式的充要条件是 zw ≥ 0.",
+      "reviewed_statement": "复数三角不等式 |z+w| ≤ |z|+|w| 取等号的充要条件是 z·conj(w) 为非负实数，其中 conj(w) 表示 w 的共轭复数。",
+      "formula_latex": "z\\overline{w}\\in[0,\\infty)",
+      "review_method": "assistant_visual_review",
+      "reviewed_at": "2026-10-15",
+      "scope": "single_statement"
+    }
+  ],
+  "cases": [
+    {"case_id": "RA001", "query": "复数三角不等式在什么条件下取等号？", "expected_status": "answered", "available_review_ids": ["FR001"], "annotation_note": "只要求当前已核对的取等号条件。"},
+    {"case_id": "RA002", "query": "对于复数 z 和 w，等式 |z+w|=|z|+|w| 成立的充要条件是什么？", "expected_status": "answered", "available_review_ids": ["FR001"], "annotation_note": "同一事实的改写问法，不是独立知识点。"},
+    {"case_id": "RA003", "query": "请给出复数三角不等式取等号条件的完整证明，写出每一步推导。", "expected_status": "refused", "available_review_ids": ["FR001"], "annotation_note": "当前注释只有结论，没有审阅完整证明；不声称整份讲义没有证明。"},
+    {"case_id": "RA004", "query": "函数 f(z)=|z|² 在哪些点复可微？", "expected_status": "refused", "available_review_ids": [], "annotation_note": "当前核对记录不覆盖这个知识点，不评价原始讲义是否含答案。"},
+    {"case_id": "RA005", "query": "请给出 Riemann 映射定理的完整证明。", "expected_status": "refused", "available_review_ids": [], "annotation_note": "当前没有该证明的核对片段。"},
+    {"case_id": "RA006", "query": "MATHSCOPE_NO_REVIEW_8f29d615", "expected_status": "refused", "available_review_ids": [], "annotation_note": "人工构造的无匹配安全控制项，不是自然问答题。"}
+  ]
+}

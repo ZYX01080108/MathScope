@@ -1,0 +1,15 @@
+[
+  {
+    "review_id": "FR001",
+    "source_sha256": "e39578464cadbeb48ecf64633bcced41b646ce1641fbb35f5a28a8fb1df9d7c3",
+    "pdf_page_number": 9,
+    "raw_start_char": 67,
+    "raw_end_char": 88,
+    "raw_quote": "不等式成为等式的充要条件是 zw ≥ 0.",
+    "reviewed_statement": "复数三角不等式 |z+w| ≤ |z|+|w| 取等号的充要条件是 z·conj(w) 为非负实数，其中 conj(w) 表示 w 的共轭复数。",
+    "formula_latex": "z\\overline{w}\\in[0,\\infty)",
+    "review_method": "assistant_visual_review",
+    "reviewed_at": "2026-10-15",
+    "scope": "single_statement"
+  }
+]

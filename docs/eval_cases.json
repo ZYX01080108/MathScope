@@ -1,0 +1,113 @@
+[
+  {
+    "case_id": "Q001",
+    "query": "为什么复数域不能成为与加法、乘法相容的有序域？",
+    "expected_behavior": "answer",
+    "required_evidence": [
+      {
+        "document_name": "lecture.pdf",
+        "pdf_page_number": 8,
+        "start_char": 0,
+        "end_char": 500
+      }
+    ]
+  },
+  {
+    "case_id": "Q002",
+    "query": "函数 f(z)=|z|² 在哪些点实可微、哪些点复可微？复可微处的导数是多少？",
+    "expected_behavior": "answer",
+    "required_evidence": [
+      {
+        "document_name": "lecture.pdf",
+        "pdf_page_number": 50,
+        "start_char": 0,
+        "end_char": 500
+      },
+      {
+        "document_name": "lecture.pdf",
+        "pdf_page_number": 50,
+        "start_char": 500,
+        "end_char": 1000
+      }
+    ]
+  },
+  {
+    "case_id": "Q003",
+    "query": "请依据这份文档，给出 Riemann 映射定理的完整证明，并引用证明所在页码。",
+    "expected_behavior": "insufficient_evidence",
+    "required_evidence": []
+  },
+  {
+    "case_id": "Q004",
+    "query": "复数三角不等式在什么条件下取等号？",
+    "expected_behavior": "answer",
+    "answer_points": ["等号成立当且仅当 z·conjugate(w) 是非负实数，允许 z 或 w 为零。"],
+    "annotation_note": "例 1.1；PDF 物理第 9 页、印刷第 3 页。文本提取丢失共轭横线，答案按 PDF 原图核对。",
+    "required_evidence": [
+      {"document_name": "lecture.pdf", "pdf_page_number": 9, "start_char": 0, "end_char": 500, "evidence_quote": "不等式成为等式的充要条件是 zw ≥ 0."}
+    ]
+  },
+  {
+    "case_id": "Q005",
+    "query": "讲义如何定义复平面中的区域和闭区域？",
+    "expected_behavior": "answer",
+    "answer_points": ["区域是复平面中非空、连通的开集。", "区域的闭包称为闭区域。"],
+    "annotation_note": "定义 1.4；PDF 物理第 27 页、印刷第 21 页。",
+    "required_evidence": [
+      {"document_name": "lecture.pdf", "pdf_page_number": 27, "start_char": 1000, "end_char": 1483, "evidence_quote": "复平面中非空连通开集称为区域"}
+    ]
+  },
+  {
+    "case_id": "Q006",
+    "query": "扩充复平面中，无穷远点的 ε 邻域如何定义？",
+    "expected_behavior": "answer",
+    "answer_points": ["对 ε>0，D(∞,ε)={z∈C: |z|>1/ε}∪{∞}，其中包含无穷远点本身。"],
+    "annotation_note": "第 1.4 节；PDF 物理第 29 页、印刷第 23 页。",
+    "required_evidence": [
+      {"document_name": "lecture.pdf", "pdf_page_number": 29, "start_char": 500, "end_char": 1000, "evidence_quote": "D(∞,ε ) = {z ∈ C : |z|> 1/ε} ∪ {∞}, 其中 ε> 0."}
+    ]
+  },
+  {
+    "case_id": "Q007",
+    "query": "一个函数在某点全纯是什么意思？仅在该点复可微是否足够？",
+    "expected_behavior": "answer",
+    "answer_points": ["在该点某个邻域内有定义，且在该邻域内每一点复可微。", "仅在单点复可微不够；|z|² 在 0 复可微，但在 0 不全纯。"],
+    "annotation_note": "定义 2.5 及后面的反例；PDF 物理第 51 页、印刷第 45 页，证据跨两个块。",
+    "required_evidence": [
+      {"document_name": "lecture.pdf", "pdf_page_number": 51, "start_char": 0, "end_char": 500, "evidence_quote": "且在该邻域内全纯"},
+      {"document_name": "lecture.pdf", "pdf_page_number": 51, "start_char": 500, "end_char": 1000, "evidence_quote": "即使在点 0 也不全纯"}
+    ]
+  },
+  {
+    "case_id": "Q008",
+    "query": "复指数函数 e^z 会取到零吗？讲义给出的周期是什么？",
+    "expected_behavior": "answer",
+    "answer_points": ["不会取到零，因为 |e^z|=e^(Re z)>0。", "给出的周期是 2πi，即 e^(z+2kπi)=e^z，k 为整数。"],
+    "annotation_note": "指数函数基本性质 (1)、(6)；PDF 物理第 62 页、印刷第 56 页，证据跨两个块。",
+    "required_evidence": [
+      {"document_name": "lecture.pdf", "pdf_page_number": 62, "start_char": 0, "end_char": 500, "evidence_quote": "由此 ez ̸= 0."},
+      {"document_name": "lecture.pdf", "pdf_page_number": 62, "start_char": 500, "end_char": 1000, "evidence_quote": "函数是周期为 i2π 的周期函数."}
+    ]
+  },
+  {
+    "case_id": "Q009",
+    "query": "分式线性变换的系数需要满足什么条件才能不退化为常值函数？为什么可以归一化为 ad-bc=1？",
+    "expected_behavior": "answer",
+    "answer_points": ["需要 ad-bc≠0。", "分子分母同乘非零常数不改变变换，可选择比例使行列式归一化为 1。"],
+    "annotation_note": "第 2.4 节、公式 (2.30)；PDF 物理第 71 页、印刷第 65 页。",
+    "required_evidence": [
+      {"document_name": "lecture.pdf", "pdf_page_number": 71, "start_char": 0, "end_char": 500, "evidence_quote": "条件 ad −bc ̸= 0 保证它不退化为"}
+    ]
+  },
+  {
+    "case_id": "Q010",
+    "query": "请依据这份文档，陈述留数定理并给出完整证明和原文页码。",
+    "expected_behavior": "insufficient_evidence",
+    "answer_points": ["当前节选正文只到第二章，无法提供留数定理的完整陈述和证明。", "目录有第 5.1 节条目，但目录不是证明证据。"],
+    "annotation_note": "PDF 物理第 4 页的目录指向印刷第 181 页；当前文件共 84 物理页，正文至印刷第 78 页。",
+    "required_evidence": [],
+    "distractor_evidence": [
+      {"document_name": "lecture.pdf", "pdf_page_number": 4, "start_char": 500, "end_char": 1000, "evidence_quote": "5.1 留数和留数定理"}
+    ]
+  }
+]
